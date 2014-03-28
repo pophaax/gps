@@ -19,14 +19,14 @@ using namespace std;
 class GPSReader {
  
 private:
-  string timestamp;
-  double latitude;
-  double longitude;
-  double altitude;
-  double speed;
-  double heading;
-  int mode;
-  int satellites_used;
+  string m_timestamp;
+  double m_latitude;
+  double m_longitude;
+  double m_altitude;
+  double m_speed;
+  double m_heading;
+  int m_mode;
+  int m_satellitesUsed;
   string secondsToTime(double seconds);
 
 public:

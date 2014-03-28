@@ -39,54 +39,54 @@ void GPSReader::readGPS(gpsmm &gps_rec) {
 	    cerr << "Read error.\n";
 	} else {
 
-		timestamp = secondsToTime(newdata->fix.time);
+		m_timestamp = secondsToTime(newdata->fix.time);
 
-		latitude = newdata->fix.latitude;
+		m_latitude = newdata->fix.latitude;
 
-		 longitude = newdata->fix.longitude;
+		 m_longitude = newdata->fix.longitude;
 
-		 altitude = newdata->fix.altitude;
+		 m_altitude = newdata->fix.altitude;
 
-		 speed = newdata->fix.speed;
+		 m_speed = newdata->fix.speed;
 
-		 heading = newdata->fix.track;
+		 m_heading = newdata->fix.track;
 
-		 mode = newdata->fix.mode;
+		 m_mode = newdata->fix.mode;
 
-	  satellites_used = newdata->satellites_used;
+	  m_satellitesUsed = newdata->satellites_used;
 	}
 }
 
 string GPSReader::getTimestamp() {
-  return timestamp;
+  return m_timestamp;
 }
 
 double GPSReader::getLatitude() {
-  return latitude;
+  return m_latitude;
 }
 
 double GPSReader::getLongitude() {
-  return longitude;
+  return m_longitude;
 }
 
 double GPSReader::getAltitude() {
-  return altitude;
+  return m_altitude;
 }
 
 double GPSReader::getSpeed() {
-  return speed;
+  return m_speed;
 }
 
 double GPSReader::getHeading() {
-  return heading;
+  return m_heading;
 }
 
 int GPSReader::getMode() {
-  return mode;
+  return m_mode;
 }
 
 int GPSReader::getSatellites_used() {
-  return satellites_used;
+  return m_satellitesUsed;
 }
 
 GPSReader::~GPSReader() {

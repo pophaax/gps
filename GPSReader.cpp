@@ -1,6 +1,14 @@
 #include "GPSReader.h"
 
 GPSReader::GPSReader() {
+	m_timestamp = "";
+	m_latitude = 0;
+	m_longitude = 0;
+	m_altitude = 0;
+	m_speed = 0;
+	m_heading = 0;
+	m_mode = 0;
+	m_satellitesUsed = 0;
 	m_gpsConnection = NULL;
 }
 

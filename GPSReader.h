@@ -31,6 +31,7 @@ private:
 	int m_mode;
 	int m_satellitesUsed;
 	string secondsToTime(double seconds);
+	gpsmm * m_gpsConnection;
 
 public:
 
@@ -41,10 +42,10 @@ public:
 	~GPSReader();
 
 	/*Sets up a connection to the USB-connected GPS*/
-	gpsmm connectToGPS();
+	void connectToGPS();
 
 	/*Starts an endless loop that reads data from the GPS*/
-	void readGPS(gpsmm &gps_rec);
+	void readGPS();
 
 	/*Returns the latest updated timestamp by the GPS*/
 	string getTimestamp();

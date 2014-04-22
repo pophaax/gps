@@ -1,6 +1,13 @@
 #include "GPSReader.h"
 
 GPSReader::GPSReader() {
+	m_gpsConnection = NULL;
+}
+
+GPSReader::~GPSReader() {
+	if (m_gpsConnection != NULL) {
+		delete m_gpsConnection;
+	}
 }
 
 string GPSReader::secondsToTime(double seconds) {
@@ -11,7 +18,7 @@ string GPSReader::secondsToTime(double seconds) {
 	return asctime(timeinfo);
 }
 
-gpsmm GPSReader::connectToGPS() {
+void GPSReader::connectToGPS() {
 
 	system("sudo pkill gpsd; gpsd /dev/ttyUSB0");
 	system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock");
@@ -21,18 +28,17 @@ gpsmm GPSReader::connectToGPS() {
 	if (gps_rec.stream(WATCH_ENABLE | WATCH_JSON) == NULL) {
 		cerr << "No GPSD running.\n";
 	}
-
-	return gps_rec;
+	m_gpsConnection = &gps_rec;
 }
 
-void GPSReader::readGPS(gpsmm &gps_rec) {
+void GPSReader::readGPS() {
 	struct gps_data_t* newdata;
 
-	if (!gps_rec.waiting(50000000)) {
+	if (!m_gpsConnection->waiting(50000000)) {
 		std::cout << "Been waiting for a long time now, pal!" << endl;
 	}
 
-	if ((newdata = gps_rec.read()) == NULL) {
+	if ((newdata = m_gpsConnection->read()) == NULL) {
 		cerr << "Read error.\n";
 	} else {
 
@@ -84,8 +90,4 @@ int GPSReader::getMode() {
 
 int GPSReader::getSatellites_used() {
 	return m_satellitesUsed;
-}
-
-GPSReader::~GPSReader() {
-
 }

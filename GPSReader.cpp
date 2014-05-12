@@ -26,12 +26,12 @@ string GPSReader::secondsToTime(double seconds) {
 	return asctime(timeinfo);
 }
 
-void GPSReader::connectToGPS() {
+void GPSReader::connectToGPS(string portName, string connectionName) {
 
-	system("sudo pkill gpsd; gpsd /dev/ttyUSB0");
+	system(("sudo pkill gpsd; gpsd " + portName).c_str());
 	system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock");
 
-	m_gpsConnection = new gpsmm("localhost", DEFAULT_GPSD_PORT);
+	m_gpsConnection = new gpsmm(connectionName.c_str(), DEFAULT_GPSD_PORT);
 	if (m_gpsConnection->stream(WATCH_ENABLE | WATCH_JSON) == NULL) {
 		throw "GPSReader::connectToGPS(), unable to connect to GPS.";
 	}

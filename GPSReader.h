@@ -2,6 +2,7 @@
 #define __GPSREADER_H__
 
 #include <iostream>
+#include <string>
 #include <stdlib.h>
 #include <libgpsmm.h>
 
@@ -42,7 +43,7 @@ public:
 	~GPSReader();
 
 	/*Sets up a connection to the USB-connected GPS*/
-	void connectToGPS();
+	void connectToGPS(string portName, string connectionName);
 
 	/*Starts an endless loop that reads data from the GPS*/
 	void readGPS();

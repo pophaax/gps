@@ -37,10 +37,10 @@ void GPSReader::connectToGPS(string portName, string connectionName) {
 	}
 }
 
-void GPSReader::readGPS() {
+void GPSReader::readGPS(int timeout) {
 	struct gps_data_t* newdata;
 
-	if (!m_gpsConnection->waiting(50000000)) {
+	if (!m_gpsConnection->waiting(timeout)) {
 		throw "GPSReader::readGPS(), timeout.";
 	}
 
@@ -86,6 +86,6 @@ int GPSReader::getMode() {
 	return m_mode;
 }
 
-int GPSReader::getSatellites_used() {
+int GPSReader::getSatellitesUsed() {
 	return m_satellitesUsed;
 }

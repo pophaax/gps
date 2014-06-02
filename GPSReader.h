@@ -45,8 +45,8 @@ public:
 	/*Sets up a connection to the USB-connected GPS*/
 	void connectToGPS(string portName, string connectionName);
 
-	/*Starts an endless loop that reads data from the GPS*/
-	void readGPS();
+	/*reads data from the GPS given a number of attempts and timeout for each attempt*/
+	void readGPS(int timeout);
 
 	/*Returns the latest updated timestamp by the GPS*/
 	string getTimestamp();
@@ -70,7 +70,7 @@ public:
 	int getMode();
 
 	/*Returns the latest updated number of satellites by the GPS that the GPS has a connection to*/
-	int getSatellites_used();
+	int getSatellitesUsed();
 };
 
 #endif

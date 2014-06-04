@@ -28,8 +28,8 @@ string GPSReader::secondsToTime(double seconds) {
 
 void GPSReader::connectToGPS(string portName, string connectionName) {
 
-	system(("sudo pkill gpsd; gpsd " + portName).c_str());
-	system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock");
+	//system(("sudo pkill gpsd; gpsd " + portName).c_str());
+	//system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock");
 
 	m_gpsConnection = new gpsmm(connectionName.c_str(), DEFAULT_GPSD_PORT);
 	if (m_gpsConnection->stream(WATCH_ENABLE | WATCH_JSON) == NULL) {

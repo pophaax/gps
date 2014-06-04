@@ -1,10 +1,8 @@
 #ifndef __MOCKGPSREADER_H__
 #define __MOCKGPSREADER_H__
 
-#include <iostream>
 #include <string>
-#include <stdlib.h>
-#include <libgpsmm.h>
+
 
 using namespace std;
 
@@ -25,10 +23,10 @@ private:
 public:
 
 	/*Constructor*/
-	GPSReader();
+	MockGPSReader();
 
 	/*Destructor*/
-	~GPSReader();
+	~MockGPSReader();
 
 	/*Sets up a connection to the USB-connected GPS*/
 	void connectToGPS(string portName, string connectionName);
@@ -46,7 +44,7 @@ public:
 
 	/*Returns the latest updated longitude by the GPS*/
 	double getLongitude();
-	void setLongitude(double Longitude);
+	void setLongitude(double longitude);
 
 	/*Returns the latest updated altitude by the GPS - Only accurate if mode is 3*/
 	double getAltitude();

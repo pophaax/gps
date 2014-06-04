@@ -61,7 +61,7 @@ void MockGPSReader::setLatitude(double latitude) {
 	m_latitude = latitude;
 }
 
-void MockGPSReader::setLongitude(double Longitude) {
+void MockGPSReader::setLongitude(double longitude) {
 	m_longitude = longitude;
 }
 

@@ -1,7 +1,6 @@
 #ifndef __GPSREADER_H__
 #define __GPSREADER_H__
 
-#include <iostream>
 #include <string>
 #include <stdlib.h>
 #include <libgpsmm.h>

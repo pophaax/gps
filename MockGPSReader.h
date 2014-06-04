@@ -1,5 +1,5 @@
-#ifndef __GPSREADER_H__
-#define __GPSREADER_H__
+#ifndef __MOCKGPSREADER_H__
+#define __MOCKGPSREADER_H__
 
 #include <iostream>
 #include <string>
@@ -8,16 +8,9 @@
 
 using namespace std;
 
-/**---------------------------------------
- *	USAGE:
- * 
- *	GPSReader g;
- *	g.connectToGPS(string portName, string connectionName);
- *	g.readGPS();
- * 
- *----------------------------------------*/
 
-class GPSReader {
+
+class MockGPSReader {
 
 private:
 	string m_timestamp;
@@ -28,9 +21,6 @@ private:
 	double m_heading;
 	int m_mode;
 	int m_satellitesUsed;
-	gpsmm * m_gpsConnection;
-
-	string secondsToTime(double seconds);
 
 public:
 
@@ -48,27 +38,35 @@ public:
 
 	/*Returns the latest updated timestamp by the GPS*/
 	string getTimestamp();
+	void setTimestamp(string timestamp);
 
 	/*Returns the latest updated latitude by the GPS*/
 	double getLatitude();
+	void setLatitude(double latitude);
 
 	/*Returns the latest updated longitude by the GPS*/
 	double getLongitude();
+	void setLongitude(double Longitude);
 
 	/*Returns the latest updated altitude by the GPS - Only accurate if mode is 3*/
 	double getAltitude();
+	void setAltitude(double altitude);
 
 	/*Returns the latest updated speed by the GPS*/
 	double getSpeed();
+	void setSpeed(double speed);
 
 	/*Returns the latest updated heading by the GPS - North is 0 degrees, 90 degrees is east*/
 	double getHeading();
+	void setHeading(double heading);
 
 	/*Returns the latest updated mode by the GPS - Value 3 is the best*/
 	int getMode();
+	void setMode(int mode);
 
 	/*Returns the latest updated number of satellites by the GPS that the GPS has a connection to*/
 	int getSatellitesUsed();
+	void setSatellitesUsed(int satellitesUsed);
 };
 
 #endif

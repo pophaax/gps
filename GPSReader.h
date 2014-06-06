@@ -29,10 +29,12 @@ private:
 	int m_satellitesUsed;
 	gpsmm * m_gpsConnection;
 
-	string secondsToTime(double seconds);
+	string secondsToTimeStamp(double seconds);
+	string parseDate(int year, int mon, int day);
+	string parseTime(int hour, int min, int sec);
+	string parseDateTime(int year, int mon, int day, int hour, int min, int sec);
 
 public:
-
 	/*Constructor*/
 	GPSReader();
 

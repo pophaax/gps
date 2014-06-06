@@ -1,4 +1,5 @@
 #include "GPSReader.h"
+#include <sstream>
 
 GPSReader::GPSReader() {
 	m_timestamp = "";
@@ -18,12 +19,49 @@ GPSReader::~GPSReader() {
 	}
 }
 
-string GPSReader::secondsToTime(double seconds) {
+string GPSReader::parseDate(int year, int mon, int day) {
+	stringstream sstm;
+
+	sstm << (year+1900) << "-";
+	if(mon < 10) sstm << "0";
+	sstm << mon << "-";
+	if(day < 10) sstm << "0";
+	sstm << day;
+
+	return sstm.str();
+}
+
+string GPSReader::parseTime(int hour, int min, int sec){
+	stringstream sstm;
+
+	if(hour < 10) sstm << "0";
+	sstm << hour << ":";
+	if(min < 10) sstm << "0";
+	sstm << min << ":";
+	if(sec < 10) sstm << "0";
+	sstm << sec;
+
+	return sstm.str();
+}
+
+string GPSReader::parseDateTime(int year, int mon, int day, int hour, int min, int sec) {
+	return parseDate(year, mon, day)+" "+parseTime(hour, min, sec)+"\n";
+}
+
+string GPSReader::secondsToTimeStamp(double seconds) {
 	time_t rawtime = (time_t) seconds;
 	struct tm * timeinfo;
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	return asctime(timeinfo);
+
+	return parseDateTime(
+		timeinfo->tm_year,
+		timeinfo->tm_mon,
+		timeinfo->tm_mday,
+		timeinfo->tm_hour,
+		timeinfo->tm_min,
+		timeinfo->tm_sec
+	);
 }
 
 void GPSReader::connectToGPS(string portName, string connectionName) {
@@ -33,6 +71,7 @@ void GPSReader::connectToGPS(string portName, string connectionName) {
 
 	m_gpsConnection = new gpsmm(connectionName.c_str(), DEFAULT_GPSD_PORT);
 	if (m_gpsConnection->stream(WATCH_ENABLE | WATCH_JSON) == NULL) {
+
 		throw "GPSReader::connectToGPS(), unable to connect to GPS.";
 	}
 }
@@ -47,7 +86,7 @@ void GPSReader::readGPS(int timeout) {
 	if ((newdata = m_gpsConnection->read()) == NULL) {
 		throw "GPSReader::readGPS(), read error.";
 	} else {
-		m_timestamp = secondsToTime(newdata->fix.time);
+		m_timestamp = secondsToTimeStamp(newdata->fix.time);
 		m_latitude = newdata->fix.latitude;
 		m_longitude = newdata->fix.longitude;
 		m_altitude = newdata->fix.altitude;

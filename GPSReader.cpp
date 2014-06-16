@@ -45,7 +45,7 @@ string GPSReader::parseTime(int hour, int min, int sec){
 }
 
 string GPSReader::parseDateTime(int year, int mon, int day, int hour, int min, int sec) {
-	return parseDate(year, mon, day)+" "+parseTime(hour, min, sec)+"\n";
+	return parseDate(year, mon, day)+" "+parseTime(hour, min, sec);
 }
 
 string GPSReader::secondsToTimeStamp(double seconds) {

@@ -42,7 +42,7 @@ public:
 	~GPSReader();
 
 	/*Sets up a connection to the USB-connected GPS*/
-	void connectToGPS(string portName, string connectionName);
+	void connectToGPS();
 
 	/*reads data from the GPS given a number of attempts and timeout for each attempt*/
 	void readGPS(int timeout);

@@ -15,7 +15,7 @@ MockGPSReader::~MockGPSReader() {
 }
 
 
-void MockGPSReader::connectToGPS(string portName, string connectionName) {
+void MockGPSReader::connectToGPS() {
 }
 
 void MockGPSReader::readGPS(int timeout) {

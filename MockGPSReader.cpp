@@ -1,9 +1,11 @@
 #include "MockGPSReader.h"
+#include <math.h>
+#include <iostream>
 
 MockGPSReader::MockGPSReader() {
 	m_timestamp = "";
-	m_latitude = 0;
-	m_longitude = 0;
+	m_latitude = 60.103580;
+	m_longitude = 19.867784;
 	m_altitude = 0;
 	m_speed = 0;
 	m_heading = 0;
@@ -83,4 +85,78 @@ void MockGPSReader::setMode(int mode) {
 
 void MockGPSReader::setSatellitesUsed(int satellitesUsed) {
 	m_satellitesUsed = satellitesUsed;
+}
+
+void MockGPSReader::setDataFromCommands(int rudderCommand, int sailCommand) {
+	const float maxSpeed = 3; //meters per iteration
+	const float maxTurn = 5;
+	if (m_speed > 0 && rudderCommand != 5984) { //ruddercommand != midships
+		//rss xtrm-mid 7616,7000,6500,mid5984mid,5468,4968,4352
+		if (rudderCommand == 7616) {
+			m_heading -= maxTurn;
+			m_speed -= (maxSpeed/10);
+		}
+		if (rudderCommand == 7000) {
+			m_heading -= maxTurn/2;
+			m_speed -= (maxSpeed/20);
+		}
+		if (rudderCommand == 6500) {
+			m_heading -= maxTurn/3;
+		}
+		if (rudderCommand == 4352) {
+			m_heading += maxTurn;
+			m_speed -= (maxSpeed/10);
+		}
+		if (rudderCommand == 4968) {
+			m_heading += maxTurn/2;
+			m_speed -= (maxSpeed/20);
+		}
+		if (rudderCommand == 5468) {
+			m_heading += maxTurn/3;
+		}
+
+		if (m_speed < 0) {
+			m_speed = 0;
+		}
+		if (m_heading >= 360) {
+			m_heading -= 360;
+		}
+		if (m_heading < 0) {
+			m_heading += 360;
+		}
+	}
+
+	//sss cls-run 7424,6600,6200,5824
+	if (sailCommand == 5824) {
+		m_speed += maxSpeed/10;
+		if (m_speed > maxSpeed) {
+			m_speed = maxSpeed;
+		}
+	}
+	if (sailCommand == 6200) {
+		m_speed += maxSpeed/20;
+		if (m_speed > maxSpeed/2) {
+			m_speed = maxSpeed/2;
+		}
+	}
+	if (sailCommand == 6600) {
+		m_speed += maxSpeed/40;
+		if (m_speed > maxSpeed/4) {
+			m_speed = maxSpeed/4;
+		}
+	}
+	if (sailCommand == 7424) {
+		m_speed += maxSpeed/80;
+		if (m_speed > maxSpeed/8) {
+			m_speed = maxSpeed/8;
+		}
+	}
+
+	//update lat/long
+	float gpsMeter = 0.00001; 
+	const double PI = 3.1415926;
+	float radHeading = m_heading * (PI/180);
+	float speed = gpsMeter * m_speed;
+	m_latitude += cos(radHeading) * speed; 
+	m_longitude += sin(radHeading) * speed; 
 }

@@ -65,6 +65,8 @@ public:
 	/*Returns the latest updated number of satellites by the GPS that the GPS has a connection to*/
 	int getSatellitesUsed();
 	void setSatellitesUsed(int satellitesUsed);
+
+	void setDataFromCommands(int rudderCommand, int sailCommand);
 };
 
 #endif

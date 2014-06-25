@@ -93,26 +93,26 @@ void MockGPSReader::setDataFromCommands(int rudderCommand, int sailCommand) {
 	if (m_speed > 0 && rudderCommand != 5984) { //ruddercommand != midships
 		//rss xtrm-mid 7616,7000,6500,mid5984mid,5468,4968,4352
 		if (rudderCommand == 7616) {
-			m_heading -= maxTurn;
-			m_speed -= (maxSpeed/10);
-		}
-		if (rudderCommand == 7000) {
-			m_heading -= maxTurn/2;
-			m_speed -= (maxSpeed/20);
-		}
-		if (rudderCommand == 6500) {
-			m_heading -= maxTurn/3;
-		}
-		if (rudderCommand == 4352) {
 			m_heading += maxTurn;
 			m_speed -= (maxSpeed/10);
 		}
-		if (rudderCommand == 4968) {
+		if (rudderCommand == 7000) {
 			m_heading += maxTurn/2;
 			m_speed -= (maxSpeed/20);
 		}
-		if (rudderCommand == 5468) {
+		if (rudderCommand == 6500) {
 			m_heading += maxTurn/3;
+		}
+		if (rudderCommand == 4352) {
+			m_heading -= maxTurn;
+			m_speed -= (maxSpeed/10);
+		}
+		if (rudderCommand == 4968) {
+			m_heading -= maxTurn/2;
+			m_speed -= (maxSpeed/20);
+		}
+		if (rudderCommand == 5468) {
+			m_heading -= maxTurn/3;
 		}
 
 		if (m_speed < 0) {

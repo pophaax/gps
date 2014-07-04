@@ -88,28 +88,28 @@ void MockGPSReader::setSatellitesUsed(int satellitesUsed) {
 }
 
 void MockGPSReader::setDataFromCommands(int rudderCommand, int sailCommand) {
-	const float maxSpeed = 3; //meters per iteration
-	const float maxTurn = 5;
+	const float maxSpeed = 10; //meters per iteration
+	const float maxTurn = 10;
 	if (m_speed > 0 && rudderCommand != 5984) { //ruddercommand != midships
 		//rss xtrm-mid 7616,7000,6500,mid5984mid,5468,4968,4352
 		if (rudderCommand == 7616) {
 			m_heading += maxTurn;
-			m_speed -= (maxSpeed/40);
+//			m_speed -= (maxSpeed/40);
 		}
 		if (rudderCommand == 7000) {
 			m_heading += maxTurn/2;
-			m_speed -= (maxSpeed/80);
+//			m_speed -= (maxSpeed/80);
 		}
 		if (rudderCommand == 6500) {
 			m_heading += maxTurn/3;
 		}
 		if (rudderCommand == 4352) {
 			m_heading -= maxTurn;
-			m_speed -= (maxSpeed/40);
+//			m_speed -= (maxSpeed/40);
 		}
 		if (rudderCommand == 4968) {
 			m_heading -= maxTurn/2;
-			m_speed -= (maxSpeed/80);
+//			m_speed -= (maxSpeed/80);
 		}
 		if (rudderCommand == 5468) {
 			m_heading -= maxTurn/3;
@@ -135,20 +135,20 @@ void MockGPSReader::setDataFromCommands(int rudderCommand, int sailCommand) {
 	}
 	if (sailCommand == 6200) {
 		m_speed += maxSpeed/10;
-		if (m_speed > maxSpeed/2) {
-			m_speed = maxSpeed/2;
+		if (m_speed > maxSpeed) {
+			m_speed = maxSpeed;
 		}
 	}
 	if (sailCommand == 6600) {
 		m_speed += maxSpeed/20;
-		if (m_speed > maxSpeed/4) {
-			m_speed = maxSpeed/4;
+		if (m_speed > maxSpeed) {
+			m_speed = maxSpeed;
 		}
 	}
 	if (sailCommand == 7424) {
 		m_speed += maxSpeed/40;
-		if (m_speed > maxSpeed/8) {
-			m_speed = maxSpeed/8;
+		if (m_speed > maxSpeed) {
+			m_speed = maxSpeed;
 		}
 	}
 

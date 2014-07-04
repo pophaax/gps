@@ -31,7 +31,7 @@ string GPSReader::parseDate(int year, int mon, int day) {
 	return sstm.str();
 }
 
-string GPSReader::parseTime(int hour, int min, int sec){
+string GPSReader::parseTime(int hour, int min, int sec) {
 	stringstream sstm;
 
 	if(hour < 10) sstm << "0";

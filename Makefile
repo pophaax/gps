@@ -33,3 +33,5 @@ $(FILE_MOCKGPS) : $(SOURCES_MOCKGPS) $(HEADERS_MOCKGPS)
 example : $(SOURCES) $(HEADERS) example.cpp
 	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
 
+clean :
+	rm -f example

@@ -34,4 +34,5 @@ example : $(SOURCES) $(HEADERS) example.cpp
 	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
 
 clean :
+	rm -f $(FILE_GPS) $(FILE_MOCKGPS)
 	rm -f example

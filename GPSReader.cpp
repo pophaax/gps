@@ -19,8 +19,8 @@ GPSReader::~GPSReader() {
 	}
 }
 
-string GPSReader::parseDate(int year, int mon, int day) {
-	stringstream sstm;
+std::string GPSReader::parseDate(int year, int mon, int day) {
+	std::stringstream sstm;
 
 	sstm << (year+1900) << "-";
 	if(mon < 10) sstm << "0";
@@ -31,8 +31,8 @@ string GPSReader::parseDate(int year, int mon, int day) {
 	return sstm.str();
 }
 
-string GPSReader::parseTime(int hour, int min, int sec) {
-	stringstream sstm;
+std::string GPSReader::parseTime(int hour, int min, int sec) {
+	std::stringstream sstm;
 
 	if(hour < 10) sstm << "0";
 	sstm << hour << ":";
@@ -44,11 +44,11 @@ string GPSReader::parseTime(int hour, int min, int sec) {
 	return sstm.str();
 }
 
-string GPSReader::parseDateTime(int year, int mon, int day, int hour, int min, int sec) {
+std::string GPSReader::parseDateTime(int year, int mon, int day, int hour, int min, int sec) {
 	return parseDate(year, mon, day)+" "+parseTime(hour, min, sec);
 }
 
-string GPSReader::secondsToTimeStamp(double seconds) {
+std::string GPSReader::secondsToTimeStamp(double seconds) {
 	time_t rawtime = (time_t) seconds;
 	struct tm * timeinfo;
 	time(&rawtime);
@@ -97,7 +97,7 @@ void GPSReader::readGPS(int timeout) {
 	}
 }
 
-string GPSReader::getTimestamp() {
+std::string GPSReader::getTimestamp() {
 	return m_timestamp;
 }
 

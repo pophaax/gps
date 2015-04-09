@@ -4,14 +4,10 @@
 #include <string>
 
 
-using namespace std;
-
-
-
 class MockGPSReader {
 
 private:
-	string m_timestamp;
+	std::string m_timestamp;
 	double m_latitude;
 	double m_longitude;
 	double m_altitude;
@@ -35,8 +31,8 @@ public:
 	void readGPS(int timeout);
 
 	/*Returns the latest updated timestamp by the GPS*/
-	string getTimestamp();
-	void setTimestamp(string timestamp);
+	std::string getTimestamp();
+	void setTimestamp(std::string timestamp);
 
 	/*Returns the latest updated latitude by the GPS*/
 	double getLatitude();

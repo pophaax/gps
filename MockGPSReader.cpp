@@ -23,7 +23,7 @@ void MockGPSReader::connectToGPS() {
 void MockGPSReader::readGPS(int timeout) {
 }
 
-string MockGPSReader::getTimestamp() {
+std::string MockGPSReader::getTimestamp() {
 	return m_timestamp;
 }
 
@@ -55,7 +55,7 @@ int MockGPSReader::getSatellitesUsed() {
 	return m_satellitesUsed;
 }
 
-void MockGPSReader::setTimestamp(string timestamp) {
+void MockGPSReader::setTimestamp(std::string timestamp) {
 	m_timestamp = timestamp;
 }
 

@@ -3,8 +3,6 @@
 #include "GPSReader.h"
 #include "MockGPSReader.h"
 
-using namespace std;
-
 
 int main() {
 	MockGPSReader g;
@@ -13,7 +11,7 @@ int main() {
 		g.readGPS(50000000);
 //		cout << "latitude: " << g.getLatitude() << endl;
 	} catch(const char* msg) {
-		cout << msg << endl;
+		std::cout << msg << std::endl;
 	}
 
 	for (int i = 0; i < 5; i++) {

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <libgpsmm.h>
 
-using namespace std;
+//using namespace std;
 
 /**---------------------------------------
  *	USAGE:
@@ -19,7 +19,7 @@ using namespace std;
 class GPSReader {
 
 private:
-	string m_timestamp;
+	std::string m_timestamp;
 	double m_latitude;
 	double m_longitude;
 	double m_altitude;
@@ -29,10 +29,10 @@ private:
 	int m_satellitesUsed;
 	gpsmm * m_gpsConnection;
 
-	string secondsToTimeStamp(double seconds);
-	string parseDate(int year, int mon, int day);
-	string parseTime(int hour, int min, int sec);
-	string parseDateTime(int year, int mon, int day, int hour, int min, int sec);
+	std::string secondsToTimeStamp(double seconds);
+	std::string parseDate(int year, int mon, int day);
+	std::string parseTime(int hour, int min, int sec);
+	std::string parseDateTime(int year, int mon, int day, int hour, int min, int sec);
 
 public:
 	/*Constructor*/
@@ -48,7 +48,7 @@ public:
 	void readGPS(int timeout);
 
 	/*Returns the latest updated timestamp by the GPS*/
-	string getTimestamp();
+	std::string getTimestamp();
 
 	/*Returns the latest updated latitude by the GPS*/
 	double getLatitude();

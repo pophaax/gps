@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <libgpsmm.h>
 
-//using namespace std;
 
 /**---------------------------------------
  *	USAGE:

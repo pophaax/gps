@@ -88,6 +88,7 @@ void GPSReader::readGPS(int timeout) {
 	if ((newdata = m_gpsConnection->read()) == NULL) {
 		throw "GPSReader::readGPS(), read error.";
 	} else {
+
 		m_timestamp = secondsToTimeStamp(newdata->fix.time);
 
 		if(std::isdigit(newdata->fix.latitude)!=0) {
@@ -114,7 +115,12 @@ void GPSReader::readGPS(int timeout) {
 			m_speed = 0;
 		}
 
-		m_heading = newdata->fix.track;
+		if(std::isdigit(newdata->fix.track)!=0) {
+			m_heading = newdata->fix.track;
+		} else {
+			m_heading = 0;
+		}
+
 		m_mode = newdata->fix.mode;
 		m_satellitesUsed = newdata->satellites_used;
 	}

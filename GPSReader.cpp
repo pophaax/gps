@@ -88,6 +88,7 @@ void GPSReader::readGPS(int timeout) {
 	} else {
 		m_timestamp = secondsToTimeStamp(newdata->fix.time);
 		m_latitude = newdata->fix.latitude;
+		std::cout << "GPS_TEST:" << newdata->fix.latitude << std::endl;
 		m_longitude = newdata->fix.longitude;
 		m_altitude = newdata->fix.altitude;
 		m_speed = newdata->fix.speed;

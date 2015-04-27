@@ -1,5 +1,7 @@
 #include "GPSReader.h"
 #include <sstream>
+#include <cstdlib>
+#include <iostream>
 
 GPSReader::GPSReader() {
 	m_timestamp = "";
@@ -78,7 +80,7 @@ void GPSReader::connectToGPS() {
 
 void GPSReader::readGPS(int timeout) {
 	struct gps_data_t* newdata;
-	std::cout << "GPS_TEST: reading data" << std::endl;
+
 	if (!m_gpsConnection->waiting(timeout)) {
 		throw "GPSReader::readGPS(), timeout.";
 	}

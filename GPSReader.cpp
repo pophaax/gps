@@ -90,25 +90,25 @@ void GPSReader::readGPS(int timeout) {
 	} else {
 		m_timestamp = secondsToTimeStamp(newdata->fix.time);
 
-		if(std::isdigit(newdata->fix.latitude)==0) {
+		if(std::isdigit(newdata->fix.latitude)!=0) {
 			m_latitude = newdata->fix.latitude;
 		} else {
 			m_latitude = 0;
 		}
 
-		if(std::isdigit(newdata->fix.longitude)==0) {
+		if(std::isdigit(newdata->fix.longitude)!=0) {
 				m_longitude = newdata->fix.longitude;
 		} else {
 			m_longitude = 0;
 		}
 
-		if(std::isdigit(newdata->fix.altitude)==0) {
+		if(std::isdigit(newdata->fix.altitude)!=0) {
 			m_altitude = newdata->fix.altitude;
 		} else {
 			m_altitude = 0;
 		}
 
-		if(std::isdigit(newdata->fix.speed)==0) {
+		if(std::isdigit(newdata->fix.speed)!=0) {
 			m_speed = newdata->fix.speed;
 		} else {
 			m_speed = 0;

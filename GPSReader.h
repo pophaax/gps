@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <libgpsmm.h>
+#include "../models/GPSModel.h"
 
 
 /**---------------------------------------
@@ -18,14 +19,9 @@
 class GPSReader {
 
 private:
-	std::string m_timestamp;
-	double m_latitude;
-	double m_longitude;
-	double m_altitude;
-	double m_speed;
-	double m_heading;
+	GPSModel m_model;
+
 	int m_mode;
-	int m_satellitesUsed;
 	gpsmm * m_gpsConnection;
 
 	std::string secondsToTimeStamp(double seconds);
@@ -69,6 +65,9 @@ public:
 
 	/*Returns the latest updated number of satellites by the GPS that the GPS has a connection to*/
 	int getSatellitesUsed();
+
+	/*Returns model*/
+	GPSModel getModel();
 };
 
 #endif

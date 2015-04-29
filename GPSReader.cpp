@@ -4,14 +4,9 @@
 #include <iostream>
 
 GPSReader::GPSReader() {
-	m_timestamp = "";
-	m_latitude = 0;
-	m_longitude = 0;
-	m_altitude = 0;
-	m_speed = 0;
-	m_heading = 0;
+	m_model = {"",0,0,0,0,0,0};
+
 	m_mode = 0;
-	m_satellitesUsed = 0;
 	m_gpsConnection = NULL;
 }
 
@@ -89,65 +84,65 @@ void GPSReader::readGPS(int timeout) {
 		throw "GPSReader::readGPS(), read error.";
 	} else {
 
-		m_timestamp = secondsToTimeStamp(newdata->fix.time);
+		m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
 
 		if(std::isdigit(newdata->fix.latitude)!=0) {
-			m_latitude = newdata->fix.latitude;
+			m_model.latitude = newdata->fix.latitude;
 		} else {
-			m_latitude = 0;
+			m_model.latitude = 0;
 		}
 
 		if(std::isdigit(newdata->fix.longitude)!=0) {
-				m_longitude = newdata->fix.longitude;
+			m_model.longitude = newdata->fix.longitude;
 		} else {
-			m_longitude = 0;
+			m_model.longitude = 0;
 		}
 
 		if(std::isdigit(newdata->fix.altitude)!=0) {
-			m_altitude = newdata->fix.altitude;
+			m_model.altitude = newdata->fix.altitude;
 		} else {
-			m_altitude = 0;
+			m_model.altitude = 0;
 		}
 
 		if(std::isdigit(newdata->fix.speed)!=0) {
-			m_speed = newdata->fix.speed;
+			m_model.speed = newdata->fix.speed;
 		} else {
-			m_speed = 0;
+			m_model.speed = 0;
 		}
 
 		if(std::isdigit(newdata->fix.track)!=0) {
-			m_heading = newdata->fix.track;
+			m_model.heading = newdata->fix.track;
 		} else {
-			m_heading = 0;
+			m_model.heading = 0;
 		}
 
 		m_mode = newdata->fix.mode;
-		m_satellitesUsed = newdata->satellites_used;
+		m_model.satellitesUsed = newdata->satellites_used;
 	}
 }
 
 std::string GPSReader::getTimestamp() {
-	return m_timestamp;
+	return m_model.timestamp;
 }
 
 double GPSReader::getLatitude() {
-	return m_latitude;
+	return m_model.latitude;
 }
 
 double GPSReader::getLongitude() {
-	return m_longitude;
+	return m_model.longitude;
 }
 
 double GPSReader::getAltitude() {
-	return m_altitude;
+	return m_model.altitude;
 }
 
 double GPSReader::getSpeed() {
-	return m_speed;
+	return m_model.speed;
 }
 
 double GPSReader::getHeading() {
-	return m_heading;
+	return m_model.heading;
 }
 
 int GPSReader::getMode() {
@@ -155,5 +150,9 @@ int GPSReader::getMode() {
 }
 
 int GPSReader::getSatellitesUsed() {
-	return m_satellitesUsed;
+	return m_model.satellitesUsed;
+}
+
+GPSModel GPSReader::getModel() {
+	return m_model;
 }

@@ -5,7 +5,7 @@
 
 
 int main() {
-	MockGPSReader g;
+	GPSReader g;
 	try {
 		g.connectToGPS();
 		g.readGPS(50000000);
@@ -15,7 +15,7 @@ int main() {
 	}
 
 	for (int i = 0; i < 5; i++) {
-		g.setDataFromCommands(5984, 5824);
+		//g.setDataFromCommands(5984, 5824);
 		std::cout << std::setprecision(10) << "lat: " << g.getLatitude() << ", long: " << g.getLongitude() << "\n";
 		std::cout << "heading: " << g.getHeading() << ", speed: " << g.getSpeed() << "\n\n";
 	}

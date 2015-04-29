@@ -3,9 +3,9 @@
 #include <cstdlib>
 #include <iostream>
 
-GPSReader::GPSReader() {
-	m_model = {"",0,0,0,0,0,0};
-
+GPSReader::GPSReader() :
+	m_model(GPSModel("",0,0,0,0,0,0))
+{
 	m_mode = 0;
 	m_gpsConnection = NULL;
 }

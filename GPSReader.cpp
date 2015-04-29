@@ -1,5 +1,6 @@
 #include "GPSReader.h"
 #include <sstream>
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 
@@ -66,7 +67,7 @@ void GPSReader::connectToGPS() {
 	//system(("sudo pkill gpsd; gpsd " + portName).c_str());
 	//system("sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock");
 
-	m_gpsConnection = new gpsmm("localhost", DEFAULT_GPSD_PORT);
+	m_gpsConnection = new gpsmm("localhostd::isnanst", DEFAULT_GPSD_PORT);
 	if (m_gpsConnection->stream(WATCH_ENABLE | WATCH_JSON) == NULL) {
 
 		throw "GPSReader::connectToGPS(), unable to connect to GPS.";
@@ -86,31 +87,31 @@ void GPSReader::readGPS(int timeout) {
 
 		m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
 
-		if(std::isdigit(newdata->fix.latitude)!=0) {
+		if(!std::isnan(newdata->fix.latitude)){
 			m_model.latitude = newdata->fix.latitude;
 		} else {
 			m_model.latitude = 0;
 		}
 
-		if(std::isdigit(newdata->fix.longitude)!=0) {
+		if(!std::isnan(newdata->fix.longitude)){
 			m_model.longitude = newdata->fix.longitude;
 		} else {
 			m_model.longitude = 0;
 		}
 
-		if(std::isdigit(newdata->fix.altitude)!=0) {
+		if(!std::isnan(newdata->fix.altitude)){
 			m_model.altitude = newdata->fix.altitude;
 		} else {
 			m_model.altitude = 0;
 		}
 
-		if(std::isdigit(newdata->fix.speed)!=0) {
+		if(!std::isnan(newdata->fix.speed)){
 			m_model.speed = newdata->fix.speed;
 		} else {
 			m_model.speed = 0;
 		}
 
-		if(std::isdigit(newdata->fix.track)!=0) {
+		if(!std::isnan(newdata->fix.track)){
 			m_model.heading = newdata->fix.track;
 		} else {
 			m_model.heading = 0;

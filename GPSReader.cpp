@@ -17,49 +17,13 @@ GPSReader::~GPSReader() {
 	}
 }
 
-std::string GPSReader::parseDate(int year, int mon, int day) {
-	std::stringstream sstm;
-
-	sstm << (year+1900) << "-";
-	if(mon < 10) sstm << "0";
-	sstm << mon << "-";
-	if(day < 10) sstm << "0";
-	sstm << day;
-
-	return sstm.str();
-}
-
-std::string GPSReader::parseTime(int hour, int min, int sec) {
-	std::stringstream sstm;
-
-	if(hour < 10) sstm << "0";
-	sstm << hour << ":";
-	if(min < 10) sstm << "0";
-	sstm << min << ":";
-	if(sec < 10) sstm << "0";
-	sstm << sec;
-
-	return sstm.str();
-}
-
-std::string GPSReader::parseDateTime(int year, int mon, int day, int hour, int min, int sec) {
-	return parseDate(year, mon, day)+" "+parseTime(hour, min, sec);
-}
-
 std::string GPSReader::secondsToTimeStamp(double seconds) {
 	time_t rawtime = (time_t) seconds;
 	struct tm * timeinfo;
-	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-
-	return parseDateTime(
-		timeinfo->tm_year,
-		timeinfo->tm_mon,
-		timeinfo->tm_mday,
-		timeinfo->tm_hour,
-		timeinfo->tm_min,
-		timeinfo->tm_sec
-	);
+	char timeInfoBuffer[100];
+	strftime(timeInfoBuffer, 100, "%F %T", timeinfo);
+	return std::string(timeInfoBuffer);
 }
 
 void GPSReader::connectToGPS() {

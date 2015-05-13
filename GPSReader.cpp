@@ -56,13 +56,21 @@ void GPSReader::readGPS(int timeout) {
 
 
 		// (n & ( 1 << k )) >> k
-		// TIME_SET		(1llu<<2)
-		// LATLON_SET	(1llu<<4)
+
+		// TIME_SET			(1llu<<2)
+		// LATLON_SET		(1llu<<4)
+
+		// SPEED_SET		(1llu<<6)
+		// TRACK_SET		(1llu<<7)
+		// SATELLITE_SET	(1llu<<15)
 
 		unsigned long int flags = newdata->set;
 
-		printf("TIME\t:%lu\t",(flags & ( 1 << 2 )) >> 2);
-		printf("LATLON\t:%lu\n",(flags & ( 1 << 2 )) >> 4);
+		printf("TIME:%lu\t",(flags & ( 1 << 2 )) >> 2);
+		printf("LATLON:%lu\t",(flags & ( 1 << 4 )) >> 4);
+		printf("SPEED:%lu\t",(flags & ( 1 << 6 )) >> 6);
+		printf("TRACK:%lu\t",(flags & ( 1 << 7 )) >> 7);
+		printf("SATELLITE:%lu\n",(flags & ( 1 << 15 )) >> 15);
 
 
 

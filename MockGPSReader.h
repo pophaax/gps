@@ -2,6 +2,7 @@
 #define __MOCKGPSREADER_H__
 
 #include <string>
+#include "../models/GPSModel.h"
 
 
 class MockGPSReader {
@@ -63,6 +64,8 @@ public:
 	void setSatellitesUsed(int satellitesUsed);
 
 	void setDataFromCommands(int rudderCommand, int sailCommand);
+
+	GPSModel getModel();
 };
 
 #endif

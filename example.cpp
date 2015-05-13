@@ -6,13 +6,15 @@
 
 int main() {
 	GPSReader g;
+	try {
+		g.connectToGPS();
+	} catch(const char* msg) {
+		std::cout << msg << std::endl;
+	}
 
 	while(true) {
-		try {
-			g.readGPS(50000000);
-		} catch(const char* msg) {
-			std::cout << "ERROR:" << msg << std::endl;
-		}
+		g.readGPS(50000000);
+
 		std::cout << std::setprecision(10) << "lat: " << g.getLatitude() << ", long: " << g.getLongitude() << "\n";
 		std::cout << "heading: " << g.getHeading() << ", speed: " << g.getSpeed() << "\n\n";
 	}

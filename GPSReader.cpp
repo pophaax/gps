@@ -54,6 +54,19 @@ void GPSReader::readGPS(int timeout) {
 		throw "GPSReader::readGPS(), read error.";
 	} else {
 
+
+		// (n & ( 1 << k )) >> k
+		// TIME_SET		(1llu<<2)
+		// LATLON_SET	(1llu<<4)
+
+		unsigned long int flags = newdata->set;
+
+		printf("TIME\t:%lu\t",(flags & ( 1 << 2 )) >> 2);
+		printf("LATLON\t:%lu\n",(flags & ( 1 << 2 )) >> 4);
+
+
+
+
 		m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
 
 		if(!std::isnan(newdata->fix.latitude)){

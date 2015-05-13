@@ -54,27 +54,54 @@ void GPSReader::readGPS(int timeout) {
 		throw "GPSReader::readGPS(), read error.";
 	} else {
 
-
-		// (n & ( 1 << k )) >> k
-
-		// TIME_SET			(1llu<<2)
-		// LATLON_SET		(1llu<<4)
-
-		// SPEED_SET		(1llu<<6)
-		// TRACK_SET		(1llu<<7)
-		// SATELLITE_SET	(1llu<<15)
-
+		//* Get status flags
 		unsigned long int flags = newdata->set;
-
+		/*
 		printf("TIME:%lu ",(flags & ( 1 << 2 )) >> 2);
 		printf("LATLON:%lu ",(flags & ( 1 << 4 )) >> 4);
 		printf("SPEED:%lu ",(flags & ( 1 << 6 )) >> 6);
 		printf("TRACK:%lu ",(flags & ( 1 << 7 )) >> 7);
 		printf("SATELLITE:%lu\n",(flags & ( 1 << 15 )) >> 15);
+		*/
 
+		//* If TIME flag is set
+		if((flags & ( 1 << 2 )) >> 2)
+		{
+			m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
+		}
 
+		//* If LATLON flag is set
+		if((flags & ( 1 << 4 )) >> 4)
+		{
+			m_model.latitude = newdata->fix.latitude;
+			m_model.longitude = newdata->fix.longitude;
+		}
 
+		//* If SPEED flag is set
+		if((flags & ( 1 << 6 )) >> 6)
+		{
+			m_model.speed = newdata->fix.speed;
+		}
 
+		//* If TRACK flag is set
+		if((flags & ( 1 << 7 )) >> 7)
+		{
+			m_model.heading = newdata->fix.track;
+		}
+
+		//* If SATELLITE flag is set
+		if((flags & ( 1 << 15 )) >> 15)
+		{
+			m_model.satellitesUsed = newdata->satellites_used;
+		}
+
+		//* If MODE flag is set
+		if((flags & ( 1 << 10 )) >> 10)
+		{
+			m_model.satellitesUsed = newdata->satellites_used;
+		}
+
+		/*
 		m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
 
 		if(!std::isnan(newdata->fix.latitude)){
@@ -109,6 +136,7 @@ void GPSReader::readGPS(int timeout) {
 
 		m_mode = newdata->fix.mode;
 		m_model.satellitesUsed = newdata->satellites_used;
+		*/
 	}
 }
 

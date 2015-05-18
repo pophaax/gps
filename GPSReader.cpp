@@ -66,6 +66,7 @@ void GPSReader::readGPS(int timeout) {
 		//* If TIME flag is set
 		if((flags & ( 1 << 2 )) >> 2)
 		{
+			m_model.online = true;
 			m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
 		}
 

@@ -15,7 +15,7 @@ int main() {
 	while(true) {
 		g.readGPS(50000000);
 
-		std::cout<< "lat: " << g.getLatitude() << ", long: " << g.getLongitude()
+		std::cout << "online:" << g.isOnline() << ", lat: " << g.getLatitude() << ", long: " << g.getLongitude()
 				 << ", heading: " << g.getHeading() << ", speed: " << g.getSpeed()
 				 << ", sat: " << g.getSatellitesUsed() << ", time: " << g.getTimestamp()
 				 << std::endl << std::endl;

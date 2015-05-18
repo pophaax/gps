@@ -98,7 +98,7 @@ void GPSReader::readGPS(int timeout) {
 		//* If MODE flag is set
 		if((flags & ( 1 << 10 )) >> 10)
 		{
-			m_model.satellitesUsed = newdata->satellites_used;
+			m_mode = newdata->fix.mode;
 		}
 
 	}

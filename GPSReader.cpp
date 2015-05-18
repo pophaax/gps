@@ -56,13 +56,12 @@ void GPSReader::readGPS(int timeout) {
 
 		//* Get status flags
 		unsigned long int flags = newdata->set;
-		/*
-		printf("TIME:%lu ",(flags & ( 1 << 2 )) >> 2);
-		printf("LATLON:%lu ",(flags & ( 1 << 4 )) >> 4);
-		printf("SPEED:%lu ",(flags & ( 1 << 6 )) >> 6);
-		printf("TRACK:%lu ",(flags & ( 1 << 7 )) >> 7);
-		printf("SATELLITE:%lu\n",(flags & ( 1 << 15 )) >> 15);
-		*/
+
+		//* If ONLINE flag is set
+		if((flags & ( 1 << 1 )) >> 1)
+		{
+			m_model.online = true;
+		}
 
 		//* If TIME flag is set
 		if((flags & ( 1 << 2 )) >> 2)
@@ -101,43 +100,11 @@ void GPSReader::readGPS(int timeout) {
 			m_model.satellitesUsed = newdata->satellites_used;
 		}
 
-		/*
-		m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
-
-		if(!std::isnan(newdata->fix.latitude)){
-			m_model.latitude = newdata->fix.latitude;
-		} else {
-			m_model.latitude = 0;
-		}
-
-		if(!std::isnan(newdata->fix.longitude)){
-			m_model.longitude = newdata->fix.longitude;
-		} else {
-			m_model.longitude = 0;
-		}
-
-		if(!std::isnan(newdata->fix.altitude)){
-			m_model.altitude = newdata->fix.altitude;
-		} else {
-			m_model.altitude = 0;
-		}
-
-		if(!std::isnan(newdata->fix.speed)){
-			m_model.speed = newdata->fix.speed;
-		} else {
-			m_model.speed = 0;
-		}
-
-		if(!std::isnan(newdata->fix.track)){
-			m_model.heading = newdata->fix.track;
-		} else {
-			m_model.heading = 0;
-		}
-
-		m_mode = newdata->fix.mode;
-		m_model.satellitesUsed = newdata->satellites_used;
-		*/
 	}
+}
+
+bool GPSReader::isOnline() {
+	return m_model.online;
 }
 
 std::string GPSReader::getTimestamp() {

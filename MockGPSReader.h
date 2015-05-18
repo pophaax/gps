@@ -31,6 +31,9 @@ public:
 	/*reads data from the GPS given a number of attempts and timeout for each attempt*/
 	void readGPS(int timeout);
 
+	/*Returns true if gps is online.*/
+	bool isOnline();
+
 	/*Returns the latest updated timestamp by the GPS*/
 	std::string getTimestamp();
 	void setTimestamp(std::string timestamp);

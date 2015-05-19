@@ -73,6 +73,7 @@ void GPSReader::readGPS(int timeout) {
 		//* If LATLON flag is set
 		if((flags & ( 1 << 4 )) >> 4)
 		{
+			m_model.online = true;
 			m_model.latitude = newdata->fix.latitude;
 			m_model.longitude = newdata->fix.longitude;
 		}

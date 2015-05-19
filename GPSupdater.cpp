@@ -14,7 +14,7 @@ m_running(true),
 m_gpsReader(reader)
 {
 	try {
-		m_gpsReader.connectToGPS();
+		m_gpsReader->connectToGPS();
 	} catch (const char * error) {
 		std::cout << "GPSupdater : connnectToGPS() : " << error << std::endl;
 	}
@@ -27,7 +27,7 @@ void GPSupdater::run()
 	{
 		std::cout << "GPSupdater : run() : exec" << std::endl;
 		try {
-			m_gpsReader.readGPS(50000000); //microseconds
+			m_gpsReader->readGPS(50000000); //microseconds
 		} catch (const char * error) {
 			std::cout << "GPSupdater : readGPS() : " << error << std::endl;
 		}

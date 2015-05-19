@@ -17,7 +17,7 @@ class GPSupdater {
 		void close();
 
 	private:
-		GPSReader m_gpsReader;
+		GPSReader *m_gpsReader;
 		std::mutex m_mutex;
 		bool m_running;
 

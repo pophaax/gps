@@ -22,17 +22,17 @@ FILE_MOCKGPS = MockGPSReader.o
 HEADERS = $(HEADERS_GPS) $(HEADERS_MOCKGPS)
 SOURCES = $(SOURCES_GPS) $(SOURCES_MOCKGPS)
 
-all : $(FILE_GPS) $(FILE_MOCKGPS)
+all : $(FILE_GPS) $(FILE_MOCKGPS) $(FILE_GPS_THREAD)
 
 $(FILE_GPS) : $(SOURCES_GPS) $(HEADERS_GPS)
 	$(CC) $(SOURCES_GPS) $(FLAGS) $(LIBS) -c -o $(FILE_GPS)
 
 $(FILE_MOCKGPS) : $(SOURCES_MOCKGPS) $(HEADERS_MOCKGPS)
 	$(CC) $(SOURCES_MOCKGPS) $(FLAGS) $(LIBS) -c -o $(FILE_MOCKGPS)
-
-example : $(SOURCES) $(HEADERS) example.cpp
+	
+example : $(SOURCES) $(HEADERS)
 	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
 
 clean :
-	rm -f $(FILE_GPS) $(FILE_MOCKGPS)
+	rm -f $(FILE_GPS) $(FILE_MOCKGPS) $(FILE_GPS_THREAD)
 	rm -f example

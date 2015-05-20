@@ -4,7 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <libgpsmm.h>
-#include "../models/GPSModel.h"
+#include "models/GPSModel.h"
 
 
 /**---------------------------------------

@@ -2,7 +2,7 @@
 #define __MOCKGPSREADER_H__
 
 #include <string>
-#include "../models/GPSModel.h"
+#include "models/GPSModel.h"
 
 
 class MockGPSReader {

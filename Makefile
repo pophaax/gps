@@ -9,7 +9,7 @@
 
 CC = g++
 FLAGS = -Wall -pedantic -Werror -std=c++14
-LIBS = -lgps
+LIBS = -lgps -I$(SAILINGROBOTS_HOME)
 
 SOURCES_GPS = GPSReader.cpp
 HEADERS_GPS = GPSReader.h

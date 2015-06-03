@@ -23,6 +23,10 @@ void MockGPSReader::connectToGPS() {
 void MockGPSReader::readGPS(int timeout) {
 }
 
+bool MockGPSReader::isOnline() {
+	return true;
+}
+
 std::string MockGPSReader::getTimestamp() {
 	return m_timestamp;
 }

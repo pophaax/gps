@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>
 #include <libgpsmm.h>
+#include "GPS.h"
 #include "models/GPSModel.h"
 
 
@@ -16,7 +17,7 @@
  * 
  *----------------------------------------*/
 
-class GPSReader {
+class GPSReader: public GPS {
 
 private:
 	GPSModel m_model;

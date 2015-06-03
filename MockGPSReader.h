@@ -2,10 +2,11 @@
 #define __MOCKGPSREADER_H__
 
 #include <string>
+#include "GPS.h"
 #include "models/GPSModel.h"
 
 
-class MockGPSReader {
+class MockGPSReader: public GPS {
 
 private:
 	std::string m_timestamp;

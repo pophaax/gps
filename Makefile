@@ -29,10 +29,7 @@ $(FILE_GPS) : $(SOURCES_GPS) $(HEADERS_GPS)
 
 $(FILE_MOCKGPS) : $(SOURCES_MOCKGPS) $(HEADERS_MOCKGPS)
 	$(CC) $(SOURCES_MOCKGPS) $(FLAGS) $(LIBS) -c -o $(FILE_MOCKGPS)
-	
-example : $(SOURCES) $(HEADERS)
-	$(CC) $(SOURCES) example.cpp $(FLAGS) $(LIBS) -o example
+
 
 clean :
 	rm -f $(FILE_GPS) $(FILE_MOCKGPS) $(FILE_GPS_THREAD)
-	rm -f example

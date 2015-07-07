@@ -19,15 +19,11 @@ GPSReader::~GPSReader() {
 
 std::string GPSReader::secondsToTimeStamp(double seconds) {
 	time_t fullSeconds = static_cast<time_t>(seconds);
-	double partSecond = seconds - fullSeconds;
-	int partSecondsFourDecimals = static_cast<int>(partSecond * 10000.0 + 0.5);
 	struct tm * timeinfo;
 	timeinfo = localtime(&fullSeconds);
 	char timeInfoBuffer[100];
 	strftime(timeInfoBuffer, 100, "%F %T", timeinfo);
 	std::string timeStamp(timeInfoBuffer);
-	timeStamp.append(".");
-	timeStamp.append(std::to_string(partSecondsFourDecimals));
 	return timeStamp;
 }
 

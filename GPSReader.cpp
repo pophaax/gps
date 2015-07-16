@@ -5,7 +5,7 @@
 #include <iostream>
 
 GPSReader::GPSReader() :
-	m_model(GPSModel("",0,0,0,0,0,0))
+	m_model(GPSModel(false,"",0,0,0,0,0,0))
 {
 	m_mode = 0;
 	m_gpsConnection = NULL;

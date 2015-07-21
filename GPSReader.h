@@ -2,7 +2,6 @@
 #define __GPSREADER_H__
 
 #include <string>
-#include <stdlib.h>
 #include <libgpsmm.h>
 #include "GPS.h"
 #include "models/GPSModel.h"

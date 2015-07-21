@@ -3,8 +3,8 @@
 
 #include <string>
 #include "GPS.h"
-#include "models/GPSModel.h"
 
+class GPSModel;
 
 class MockGPSReader: public GPS {
 

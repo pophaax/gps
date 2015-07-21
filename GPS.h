@@ -2,8 +2,8 @@
 #define __GPS_H__
 
 #include <string>
-#include "models/GPSModel.h"
 
+class GPSModel;
 
 class GPS {
 

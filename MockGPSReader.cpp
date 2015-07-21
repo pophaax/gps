@@ -1,6 +1,7 @@
 #include "MockGPSReader.h"
 #include <math.h>
 #include <iostream>
+#include "models/GPSModel.h"
 
 MockGPSReader::MockGPSReader() {
 	m_timestamp = "";

@@ -5,7 +5,7 @@
 #include <iostream>
 
 GPSReader::GPSReader() :
-	m_model(GPSModel("",0,0,0,0,0,0))
+	m_model(GPSModel("",PositionModel(0,0),0,0,0,0))
 {
 	m_mode = 0;
 	m_gpsConnection = NULL;
@@ -70,8 +70,8 @@ void GPSReader::readGPS(int timeout) {
 		if((flags & ( 1 << 4 )) >> 4)
 		{
 			m_model.online = true;
-			m_model.latitude = newdata->fix.latitude;
-			m_model.longitude = newdata->fix.longitude;
+			m_model.positionModel.latitude = newdata->fix.latitude;
+			m_model.positionModel.longitude = newdata->fix.longitude;
 		}
 
 		//* If SPEED flag is set
@@ -110,11 +110,11 @@ std::string GPSReader::getTimestamp() {
 }
 
 double GPSReader::getLatitude() {
-	return m_model.latitude;
+	return m_model.positionModel.latitude;
 }
 
 double GPSReader::getLongitude() {
-	return m_model.longitude;
+	return m_model.positionModel.longitude;
 }
 
 double GPSReader::getAltitude() {

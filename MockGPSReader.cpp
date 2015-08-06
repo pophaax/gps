@@ -166,5 +166,5 @@ void MockGPSReader::setDataFromCommands(int rudderCommand, int sailCommand) {
 	m_longitude += sin(radHeading) * speed; 
 }
 GPSModel MockGPSReader::getModel() {
-	return GPSModel("",0,0,0,0,0,0);
+	return GPSModel("",PositionModel(0,0),0,0,0,0);
 }

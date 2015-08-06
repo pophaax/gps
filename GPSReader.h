@@ -4,6 +4,7 @@
 #include <string>
 #include <libgpsmm.h>
 #include "GPS.h"
+#include "models/PositionModel.h"
 #include "models/GPSModel.h"
 
 

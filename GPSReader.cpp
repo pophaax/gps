@@ -17,10 +17,15 @@ GPSReader::~GPSReader() {
 	}
 }
 
-std::string GPSReader::secondsToTimeStamp(double seconds) {
+// gmt + 3 h timestamp (helsinki)
+std::string GPSReader::secondsToTimeStamp(double seconds, bool utc) {
 	time_t fullSeconds = static_cast<time_t>(seconds);
 	struct tm * timeinfo;
-	timeinfo = localtime(&fullSeconds);
+	if(utc) // utc
+		timeinfo = gmtime(&fullSeconds);		
+	else // gmt + 3
+		timeinfo = localtime(&fullSeconds);
+		
 	char timeInfoBuffer[100];
 	strftime(timeInfoBuffer, 100, "%F %T", timeinfo);
 	std::string timeStamp(timeInfoBuffer);
@@ -62,8 +67,10 @@ void GPSReader::readGPS(int timeout) {
 		//* If TIME flag is set
 		if((flags & ( 1 << 2 )) >> 2)
 		{
+			/********************************************* setting up timestamps *****************************/ 
 			m_model.online = true;
-			m_model.timestamp = secondsToTimeStamp(newdata->fix.time);
+			m_model.timestamp = secondsToTimeStamp(newdata->fix.time, false);
+			m_model.utc_timestamp = secondsToTimeStamp(newdata->fix.time, true);
 		}
 
 		//* If LATLON flag is set

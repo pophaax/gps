@@ -25,7 +25,7 @@ private:
 	int m_mode;
 	gpsmm * m_gpsConnection;
 
-	std::string secondsToTimeStamp(double seconds);
+	std::string secondsToTimeStamp(double seconds, bool utc);
 	std::string parseDate(int year, int mon, int day);
 	std::string parseTime(int hour, int min, int sec);
 	std::string parseDateTime(int year, int mon, int day, int hour, int min, int sec);

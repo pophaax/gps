@@ -8,7 +8,7 @@
 #######################################################
 
 CC = g++
-FLAGS = -Wall -pedantic -Werror -std=c++14
+FLAGS = -g -Wall -pedantic -Werror -std=c++14
 LIBS = -lgps -I$(SAILINGROBOTS_HOME)
 
 SOURCES_GPS = GPSReader.cpp
